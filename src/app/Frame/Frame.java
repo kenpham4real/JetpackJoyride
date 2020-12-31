@@ -1,17 +1,14 @@
+// Components
 package app.Frame;
+import app.Board.Board;
+
+// Java Packages
 import java.awt.Toolkit;
 import java.awt.Dimension;
-
-
-// Packages
 import javax.swing.*;
-
-import app.Board.Board;
 
 
 public class Frame {
-
-    
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Jetpack Joyride");
