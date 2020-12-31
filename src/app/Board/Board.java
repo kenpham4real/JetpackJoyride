@@ -1,19 +1,23 @@
 package app.Board;
 
+import app.Board.Paint.PaintPlayer.PaintPlayer;
+import app.Obstacles.Coin.Coin;
 import app.Player.Player;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.Image;
 import java.awt.event.*;
-import java.awt.*;
 
 public class Board extends JPanel implements ActionListener {
     private Player player;
     private Image img;
     private Timer timer;
+    private Coin coin;
 
     public Board() {
         player = new Player();
+        coin = new Coin();
         addKeyListener(new AL());
         setFocusable(true);
         ImageIcon icon = new ImageIcon("D:/IU Study/OOP/Jetpack joyride/src/app/assets/images/background.jpg");
@@ -28,23 +32,12 @@ public class Board extends JPanel implements ActionListener {
         repaint();
     }
 
+    @Override
     public void paint(Graphics graphic) {
         super.paint(graphic);
-        Graphics2D g2d = (Graphics2D) graphic;
-        if((player.getX() - 123) % 2400 == 0){
-            player.setNx(0);
-        }
-        if((player.getX() - 1600) % 2400 == 0){
-            player.setNx2(0);
-        }
-        System.out.println("Starting to draw background");
-        g2d.drawImage(img, 1350 - player.getNx2(), 0, null);
-        if(player.getX() >= 123){
-            g2d.drawImage(img, 1350 - player.getNx(), 0, null);
-        }
-        System.out.println("Starting to draw player");
-        g2d.drawImage(player.getImage(), 75, player.getY(), null);
 
+        PaintPlayer currPlayer = new PaintPlayer(graphic, player, img);
+        currPlayer.paintPlayer();
     }
 
     private class AL extends KeyAdapter {
